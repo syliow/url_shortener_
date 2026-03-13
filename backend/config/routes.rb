@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   post "/shorten", to: "short_urls#create"
+  get "/:short_url", to: "short_urls#redirect"
 
   # Defines the root path route ("/")
   # root "posts#index"
