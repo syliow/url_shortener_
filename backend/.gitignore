@@ -6,6 +6,8 @@
 !/log/.keep
 
 # Environment variables and keys
-.env*
+.env
+.env.*
+!.env.example
 /config/master.key
 /.kamal/secrets
