@@ -1,5 +1,5 @@
 class ShortUrl < ApplicationRecord
-    validates :long_url, presence: true
+    validates :original_url, presence: true
 
     after_create :generate_short_url
 
@@ -19,6 +19,6 @@ class ShortUrl < ApplicationRecord
             number /= 62
         end
 
-        update_column(:short_url, code)
+        self.update(short_url: code)
     end
 end
