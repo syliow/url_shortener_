@@ -29,7 +29,7 @@ Example of bit.ly link
 
 TODO: Analytics
 
-# Database Schema Draft
+# Schema Draft
 
 ## Urls Table (For redirect)
 
@@ -45,7 +45,26 @@ TODO: Analytics
 - short_url: string
 - ip_address: string
 - country: string
-- city: string (city might be optional?)
+- city: string
+- clicked_at: datetime
+
+# Analytics for Visits Table
+
+## (For listing all short_urls)
+
+- short_url: string
+- original_url: string
+- title: string
+- created_at: datetime
+- visits_count: integer
+
+## (For each record of short_url visits)
+
+- short_url: string
+- original_url: string
+- title: string
+- city: string
+- country: string
 - clicked_at: datetime
 
 # Backend API

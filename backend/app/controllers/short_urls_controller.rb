@@ -2,6 +2,18 @@ require 'net/http'
 require 'nokogiri'
 
 class ShortUrlsController < ApplicationController
+    # For analytics
+    def index
+      urls = ShortUrl.all
+      render json: urls, status: :ok
+    end
+
+    def show 
+      url = ShortUrl.find_by(short_url: params[:short_url])
+      render json: url, status: :ok
+    end
+
+    
     def create
       # We should always fetch the title first before we save to db
       page_title = fetch_title(params[:long_url])

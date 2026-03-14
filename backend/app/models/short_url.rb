@@ -22,4 +22,7 @@ class ShortUrl < ApplicationRecord
 
         self.update(short_url: code)
     end
+
+    # TODO: Add counting visits
+    
 end
