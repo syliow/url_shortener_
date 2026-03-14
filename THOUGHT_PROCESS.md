@@ -42,11 +42,11 @@ TODO: Analytics
 ## Visits Table (For report)
 
 - id (PK): integer
-- short_url: string
+- short_url_id: integer
 - ip_address: string
 - country: string
 - city: string
-- clicked_at: datetime
+- created_at: datetime
 
 # Analytics for Visits Table
 
@@ -90,4 +90,10 @@ TODO: Analytics
 
 - ShortUrl.all returns the result fine, but it is not sustainable if the scale grows (e.g. 100k urls)
 - Need to add pagination or limit to X amount of urls
-- Temp idea: join with visits table and count the number of visits for each url
+- Solution: LEFT JOIN with visits table and count the number of visits for each url (LEFT JOIN instead of INNER JOIN to include URLs with 0 visits)
+
+4. For `HTTP Status Code on Redirect`
+
+- Chosen: 302 (Found) instead of 301 (Moved Permanently)
+- Reason: Browsers cache 301 redirects permanently, which would bypass our analytics tracking after first visit
+- 302 forces browser to always hit our server, allowing us to track every visit
