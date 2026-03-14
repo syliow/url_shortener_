@@ -39,11 +39,29 @@ TODO: Analytics
 - title: string
 - created_at: datetime
 
-## Clicks Table (For report)
+## Visits Table (For report)
 
 - id (PK): integer
-- url_id: integer
+- short_url: string
 - ip_address: string
 - country: string
 - city: string (city might be optional?)
 - clicked_at: datetime
+
+# Backend API
+
+- Rails uses MVC architecture
+- Model, View, Controller
+- Model: controls the data logic
+- view: the website ui
+- controller: the api endpoint
+
+# Tradeoffs
+
+1. for ShortUrl table: use text instead of string because we want to NOT have a limit for long URLS (Example: user can enter long url that exceeds 255 characters)
+2. For `Generating unique code for Short URL`
+
+- Chosen solution: Base62 instead of random string
+- Issue: Generated code is very predictable (e.g. 000001, 000002, ...)
+- Workaround: Add 1 billion to the id before generating the code
+- Why it works: 62^5 = 916 132 832 (largest number for 5 digits in base62), so if we start from 1b, we can guarantee every code starts from 6 digits (e.g: 1M8Qfg that does not look as predictable as 000001)
