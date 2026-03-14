@@ -14,6 +14,7 @@ class ShortUrlsController < ApplicationController
       urls = ShortUrl.left_joins(:visits)
                       .group("short_urls.id")
                       .select("short_urls.*, COUNT(visits.id) AS visits_count")
+                      .order(created_at: :asc)
       render json: urls, status: :ok
     end
 
