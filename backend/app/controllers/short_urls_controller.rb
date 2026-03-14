@@ -57,7 +57,9 @@ class ShortUrlsController < ApplicationController
       if url
         # Track the visit using the real visitor IP
         url.visits.create(ip_address: request.remote_ip)
-        render json: { longUrl: url.original_url }, status: :found, location: url.original_url
+        # Tradeoff: Found (HTTP 302) vs Moved Permanently (HTTP 301)
+        # Found: Useful for our scenario bcs we need to track the number of visits (analytics)
+        redirect_to url.original_url, status: :found, allow_other_host: true
       else
         render json: { error: "Invalid short url" }, status: :not_found
       end
