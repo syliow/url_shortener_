@@ -15,10 +15,15 @@ class ShortUrlsController < ApplicationController
     end
 
     def redirect
-      url = ShortUrl.find_by!(short_url: params[:short_url])
-      
-      # return the long url and then redirect user to the origina url
-      render json: { longUrl: url.original_url }, status: :found, location: url.original_url
+      url = ShortUrl.find_by(short_url: params[:short_url])
+
+      if url
+        # Track the visit using the real visitor IP
+        url.visits.create(ip_address: request.remote_ip)
+        render json: { longUrl: url.original_url }, status: :found, location: url.original_url
+      else
+        render json: { error: "Invalid short url" }, status: :not_found
+      end
     end
 
     private

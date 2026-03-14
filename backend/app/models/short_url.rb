@@ -1,5 +1,6 @@
 class ShortUrl < ApplicationRecord
     validates :original_url, presence: true
+    has_many :visits
 
     after_create :generate_short_url
 
