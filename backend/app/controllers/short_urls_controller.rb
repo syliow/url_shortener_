@@ -7,7 +7,13 @@ class ShortUrlsController < ApplicationController
       # TODO: the below line returns all the urls from db, can make it more efficient
       # TODO: Add either pagination? or limit to X amount of urls?
       # TODO: Get the total number of visits for each url
-      urls = ShortUrl.all
+       
+      # Why left join instead of inner join?
+      # There might be short_url with 0 visits, using inner join will exclude those short_url in results
+      # TODO: Consider future scaling with cache instead of manual count (https://guides.rubyonrails.org/association_basics.html#counter-cache)
+      urls = ShortUrl.left_joins(:visits)
+                      .group("short_urls.id")
+                      .select("short_urls.*, COUNT(visits.id) AS visits_count")
       render json: urls, status: :ok
     end
 
