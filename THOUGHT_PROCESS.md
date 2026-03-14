@@ -78,9 +78,16 @@ TODO: Analytics
 # Tradeoffs
 
 1. for ShortUrl table: use text instead of string because we want to NOT have a limit for long URLS (Example: user can enter long url that exceeds 255 characters)
+
 2. For `Generating unique code for Short URL`
 
 - Chosen solution: Base62 instead of random string
 - Issue: Generated code is very predictable (e.g. 000001, 000002, ...)
 - Workaround: Add 1 billion to the id before generating the code
 - Why it works: 62^5 = 916 132 832 (largest number for 5 digits in base62), so if we start from 1b, we can guarantee every code starts from 6 digits (e.g: 1M8Qfg that does not look as predictable as 000001)
+
+3. For `GET/ urls` under analytics
+
+- ShortUrl.all returns the result fine, but it is not sustainable if the scale grows (e.g. 100k urls)
+- Need to add pagination or limit to X amount of urls
+- Temp idea: join with visits table and count the number of visits for each url

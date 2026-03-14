@@ -4,6 +4,9 @@ require 'nokogiri'
 class ShortUrlsController < ApplicationController
     # For analytics
     def index
+      # TODO: the below line returns all the urls from db, can make it more efficient
+      # TODO: Add either pagination? or limit to X amount of urls?
+      # TODO: Get the total number of visits for each url
       urls = ShortUrl.all
       render json: urls, status: :ok
     end
