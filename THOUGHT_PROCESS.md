@@ -29,7 +29,7 @@ Example of bit.ly link
 
 TODO: Analytics
 
-# Database Schema Draft
+# Schema Draft
 
 ## Urls Table (For redirect)
 
@@ -39,11 +39,61 @@ TODO: Analytics
 - title: string
 - created_at: datetime
 
-## Clicks Table (For report)
+## Visits Table (For report)
 
 - id (PK): integer
-- url_id: integer
+- short_url_id: integer
 - ip_address: string
 - country: string
-- city: string (city might be optional?)
+- city: string
+- created_at: datetime
+
+# Analytics for Visits Table
+
+## (For listing all short_urls)
+
+- short_url: string
+- original_url: string
+- title: string
+- created_at: datetime
+- visits_count: integer
+
+## (For each record of short_url visits)
+
+- short_url: string
+- original_url: string
+- title: string
+- city: string
+- country: string
 - clicked_at: datetime
+
+# Backend API
+
+- Rails uses MVC architecture
+- Model, View, Controller
+- Model: controls the data logic
+- view: the website ui
+- controller: the api endpoint
+
+# Tradeoffs
+
+1. for ShortUrl table: use text instead of string because we want to NOT have a limit for long URLS (Example: user can enter long url that exceeds 255 characters)
+
+2. For `Generating unique code for Short URL`
+
+- Chosen solution: Base62 instead of random string
+- Issue: Generated code is very predictable (e.g. 000001, 000002, ...)
+- Workaround: Add 1 billion to the id before generating the code
+- Why it works: 62^5 = 916 132 832 (largest number for 5 digits in base62), so if we start from 1b, we can guarantee every code starts from 6 digits (e.g: 1M8Qfg that does not look as predictable as 000001)
+
+3. For `GET/ urls` under analytics
+
+- ShortUrl.all returns the result fine, but it is not sustainable if the scale grows (e.g. 100k urls)
+- Need to add pagination or limit to X amount of urls
+- Solution: LEFT JOIN with visits table and count the number of visits for each url (LEFT JOIN instead of INNER JOIN to include URLs with 0 visits)
+
+4. For `HTTP Status Code on Redirect`
+
+- Chosen: 302 (Found) instead of 301 (Moved Permanently)
+- Reason: Browsers cache 301 redirects permanently, which would bypass our analytics tracking after first visit
+- 302 forces browser to always hit our server, allowing us to track every visit

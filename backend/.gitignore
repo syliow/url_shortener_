@@ -1,0 +1,13 @@
+# Ignore temporary files and logs
+/tmp/*
+/log/*
+
+!/tmp/.keep
+!/log/.keep
+
+# Environment variables and keys
+.env
+.env.*
+!.env.example
+/config/master.key
+/.kamal/secrets
