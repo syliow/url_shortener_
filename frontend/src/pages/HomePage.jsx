@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { createShortUrl, buildShortUrl } from '../api'
+import { createShortUrl, buildShortUrl, getShortUrlDomain } from '../api'
 import Input from '../components/Input'
 import Button from '../components/Button'
 import ErrorMessage from '../components/ErrorMessage'
@@ -33,12 +33,18 @@ export default function HomePage() {
     }
 
     return (
-        <div>
-            <h1>URL Shortener</h1>
+        <div className="p-4 sm:p-8 max-w-2xl mx-auto">
+            <h2 className="text-xl mb-6">Quick create: Short link</h2>
 
-            <div>
-                <label htmlFor="url-input">Enter your destination URL</label>
-                <form onSubmit={handleSubmit}>
+            <div className="mb-6 text-sm">
+                Domain: <strong>{getShortUrlDomain()}</strong>
+            </div>
+
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="url-input" className="block mb-2">
+                    Enter your destination URL
+                </label>
+                <div className="flex flex-col sm:flex-row gap-2">
                     <Input
                         id="url-input"
                         type="url"
@@ -48,24 +54,24 @@ export default function HomePage() {
                         required
                     />
                     <Button type="submit" disabled={loading}>
-                        {loading ? 'Creating...' : 'Create your short link'}
+                        {loading ? 'Creating...' : 'Create short link'}
                     </Button>
-                </form>
+                </div>
+            </form>
 
-                <ErrorMessage message={error} />
-            </div>
+            <ErrorMessage message={error} />
 
             {loading && <LoadingSpinner />}
 
             {result && (
-                <div>
-                    <h2>Your link is ready!</h2>
-                    <div>
-                        <p>Title: {result.title || 'Untitled'}</p>
-                        <p>Short URL: {buildShortUrl(result.short_url)}</p>
-                        <p>Original URL: {result.original_url}</p>
-                        <Button onClick={handleCopy}>Copy Short URL</Button>
+                <div className="mt-6 p-4 border">
+                    <h3 className="mb-3">Your link is ready!</h3>
+                    <div className="p-3 border mb-3 break-all">
+                        <a href={buildShortUrl(result.short_url)} target="_blank" rel="noopener noreferrer">
+                            {buildShortUrl(result.short_url)}
+                        </a>
                     </div>
+                    <Button onClick={handleCopy}>Copy link</Button>
                 </div>
             )}
         </div>
