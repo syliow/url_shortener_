@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { createShortUrl, buildShortUrl } from '../api'
 import Input from '../components/Input'
 import Button from '../components/Button'
 import ErrorMessage from '../components/ErrorMessage'
@@ -15,11 +16,19 @@ export default function HomePage() {
         setLoading(true)
         setError(null)
 
-       //todo: try catch api here
+        try {
+            const data = await createShortUrl(longUrl)
+            setResult(data)
+            setLongUrl('')
+        } catch (err) {
+            setError(err.message)
+        } finally {
+            setLoading(false)
+        }
     }
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(`http://localhost:3000/${result.short_url}`)
+        navigator.clipboard.writeText(buildShortUrl(result.short_url))
         alert('Copied!')
     }
 
@@ -53,7 +62,7 @@ export default function HomePage() {
                     <h2>Your link is ready!</h2>
                     <div>
                         <p>Title: {result.title || 'Untitled'}</p>
-                        <p>Short URL: http://localhost:3000/{result.short_url}</p>
+                        <p>Short URL: {buildShortUrl(result.short_url)}</p>
                         <p>Original URL: {result.original_url}</p>
                         <Button onClick={handleCopy}>Copy Short URL</Button>
                     </div>
