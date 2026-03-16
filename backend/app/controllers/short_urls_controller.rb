@@ -48,6 +48,8 @@ class ShortUrlsController < ApplicationController
     
     def create
       # We should always fetch the title first before we save to db
+      # TODO: What if fetching title takes too long. Maybe can consider improving with background jobs
+      # https://guides.rubyonrails.org/active_job_basics.html
       page_title = fetch_title(params[:long_url])
 
       url = ShortUrl.create(
