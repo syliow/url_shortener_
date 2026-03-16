@@ -3,19 +3,25 @@ require 'nokogiri'
 
 class ShortUrlsController < ApplicationController
     # For analytics
-    def index
-      # TODO: the below line returns all the urls from db, can make it more efficient
-      # TODO: Add either pagination? or limit to X amount of urls?
-      # TODO: Get the total number of visits for each url
-       
+    def index       
       # Why left join instead of inner join?
       # There might be short_url with 0 visits, using inner join will exclude those short_url in results
       # TODO: Consider future scaling with cache instead of manual count (https://guides.rubyonrails.org/association_basics.html#counter-cache)
+      # https://guides.rubyonrails.org/active_record_querying.html#limit-and-offset
+      # Default should be at page 1 with 10 row per page 
+      page = params[:page].to_i || 1
+      per_page = params[:per_page].to_i || 10
+      
       urls = ShortUrl.left_joins(:visits)
                       .group("short_urls.id")
                       .select("short_urls.*, COUNT(visits.id) AS visits_count")
-                      .order(created_at: :asc)
-      render json: urls, status: :ok
+                      .order(created_at: :desc)
+                      .limit(per_page)
+                      .offset((page - 1) * per_page)
+                      # quick logic check: 
+                      # page 1  = (1-1) * 10 = 0 | page 2 = (2-1)*10 = 10
+      total = ShortUrl.count
+      render json: { urls: urls, total: total }, status: :ok
     end
 
     # For individual short url analytics
@@ -67,19 +73,17 @@ class ShortUrlsController < ApplicationController
     end
 
     private
-
+    # https://nokogiri.org/tutorials/parsing_an_html_xml_document.html
     def fetch_title(url_string)
       uri = URI.parse(url_string)
       response = Net::HTTP.get_response(uri)
 
-      if response.is_a?(Net::HTTPSuccess)
-        document = Nokogiri::HTML(response.body)
-        document.at_css("title")&.text 
-      elsif response.is_a?(Net::HTTPRedirection)
-        fetch_title(response['location'])
-      else
-        "Untitled"
-      end
+      html = Nokogiri::HTML(response.body)
+      title = html.css("title").text
+
+      title.empty? ? "Untitled" : title
+    # https://guides.rubyonrails.org/error_reporting.html
+    # TODO: The rescue here is needed bcs user might enter invalid/ bad url. We need to handle those edge cases too
     rescue
       "Untitled"
     end
