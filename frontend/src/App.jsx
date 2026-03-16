@@ -16,10 +16,30 @@ function App() {
   }
 
   return (
-    <div>
-      <nav>
-        <button onClick={navigateToHome}>Home</button>
-        <button onClick={navigateToAnalytics}>Analytics</button>
+    <div className="min-h-screen">
+      <nav className="border-b p-4">
+        <div className="flex gap-2">
+          <button
+            onClick={navigateToHome}
+            className={`px-4 py-2 ${
+              currentPage === 'home'
+                ? 'bg-black text-white'
+                : ''
+            }`}
+          >
+            Home
+          </button>
+          <button
+            onClick={navigateToAnalytics}
+            className={`px-4 py-2 ${
+              currentPage === 'analytics' || currentPage === 'details'
+                ? 'bg-black text-white'
+                : ''
+            }`}
+          >
+            Analytics
+          </button>
+        </div>
       </nav>
 
       {currentPage === 'home' && <HomePage />}
