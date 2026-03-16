@@ -73,19 +73,17 @@ class ShortUrlsController < ApplicationController
     end
 
     private
-
+    # https://nokogiri.org/tutorials/parsing_an_html_xml_document.html
     def fetch_title(url_string)
       uri = URI.parse(url_string)
       response = Net::HTTP.get_response(uri)
 
-      if response.is_a?(Net::HTTPSuccess)
-        document = Nokogiri::HTML(response.body)
-        document.at_css("title")&.text 
-      elsif response.is_a?(Net::HTTPRedirection)
-        fetch_title(response['location'])
-      else
-        "Untitled"
-      end
+      html = Nokogiri::HTML(response.body)
+      title = html.css("title").text
+
+      title.empty? ? "Untitled" : title
+    # https://guides.rubyonrails.org/error_reporting.html
+    # TODO: The rescue here is needed bcs user might enter invalid/ bad url. We need to handle those edge cases too
     rescue
       "Untitled"
     end
