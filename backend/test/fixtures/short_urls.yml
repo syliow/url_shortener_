@@ -1,11 +1,33 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  original_url: MyText
-  short_url: MyString
-  title: MyString
+# A better guide: https://guides.rubyonrails.org/testing.html#fixtures
+google:
+  original_url: https://www.google.com
+  short_url: aB3Xk9
+  title: Google
 
-two:
-  original_url: MyText
-  short_url: MyString
-  title: MyString
+github:
+  original_url: https://github.com
+  short_url: cD5Ym2
+  title: GitHub
+
+# Testing some edge cases
+a_very_very_long_name:
+  original_url: https://www.google.com/search?q=rails&sxsrf=ANbL-n5M8UxjNyZKDU1K-jL6pDPByzCB2Q%3A1773699424305
+  short_url: cXzK2c
+  title: rails - Google Search (a very very very very very long testing title)
+
+untitled:
+  original_url: https://example.com/noheader
+  short_url: xY8Pp3
+  title: Untitled
+
+http_url_not_https:
+  original_url: http://example.com/ok
+  short_url: zZ1Qq9
+  title: HTTP site
+
+special_chars:
+  original_url: https://example.com/path?some#random?string@123
+  short_url: mN4Rr5
+  title: Example with Special Chars
