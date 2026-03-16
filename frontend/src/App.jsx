@@ -1,19 +1,19 @@
-import { useState } from 'react'
-import './App.css'
-import HomePage from './pages/HomePage'
-import AnalyticsPage from './pages/AnalyticsPage'
-import UrlDetailsPage from './pages/UrlDetailsPage'
+import { useState } from "react";
+import "./App.css";
+import HomePage from "./pages/HomePage";
+import AnalyticsPage from "./pages/AnalyticsPage";
+import UrlDetailsPage from "./pages/UrlDetailsPage";
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home')
-  const [selectedShortUrl, setSelectedShortUrl] = useState(null)
+  const [currentPage, setCurrentPage] = useState("home");
+  const [selectedShortUrl, setSelectedShortUrl] = useState(null);
 
-  const navigateToHome = () => setCurrentPage('home')
-  const navigateToAnalytics = () => setCurrentPage('analytics')
+  const navigateToHome = () => setCurrentPage("home");
+  const navigateToAnalytics = () => setCurrentPage("analytics");
   const navigateToDetails = (shortUrl) => {
-    setSelectedShortUrl(shortUrl)
-    setCurrentPage('details')
-  }
+    setSelectedShortUrl(shortUrl);
+    setCurrentPage("details");
+  };
 
   return (
     <div className="min-h-screen">
@@ -22,9 +22,7 @@ function App() {
           <button
             onClick={navigateToHome}
             className={`px-4 py-2 ${
-              currentPage === 'home'
-                ? 'bg-black text-white'
-                : ''
+              currentPage === "home" ? "bg-black text-white" : ""
             }`}
           >
             Home
@@ -32,9 +30,9 @@ function App() {
           <button
             onClick={navigateToAnalytics}
             className={`px-4 py-2 ${
-              currentPage === 'analytics' || currentPage === 'details'
-                ? 'bg-black text-white'
-                : ''
+              currentPage === "analytics" || currentPage === "details"
+                ? "bg-black text-white"
+                : ""
             }`}
           >
             Analytics
@@ -42,13 +40,18 @@ function App() {
         </div>
       </nav>
 
-      {currentPage === 'home' && <HomePage />}
-      {currentPage === 'analytics' && <AnalyticsPage onSelectUrl={navigateToDetails} />}
-      {currentPage === 'details' && selectedShortUrl && (
-        <UrlDetailsPage shortUrl={selectedShortUrl} onBack={navigateToAnalytics} />
+      {currentPage === "home" && <HomePage />}
+      {currentPage === "analytics" && (
+        <AnalyticsPage onSelectUrl={navigateToDetails} />
+      )}
+      {currentPage === "details" && selectedShortUrl && (
+        <UrlDetailsPage
+          shortUrl={selectedShortUrl}
+          onBack={navigateToAnalytics}
+        />
       )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
