@@ -19,9 +19,9 @@ export async function createShortUrl(longUrl) {
   return res.json()
 }
 
-// GET /urls - List all URLs with visit counts
-export async function getAllUrls() {
-  const res = await fetch(`${API_URL}/urls`)
+// GET /urls - List all URLs with visit counts (with pagination)
+export async function getAllUrls(page, perPage) {
+  const res = await fetch(`${API_URL}/urls?page=${page}&per_page=${perPage}`)
   if (!res.ok) throw new Error(`Failed to fetch URLs`)
   return res.json()
 }
