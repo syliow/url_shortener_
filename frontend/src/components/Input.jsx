@@ -7,6 +7,7 @@ export default function Input({ id, type = "text", placeholder, value, onChange,
       value={value}
       onChange={onChange}
       required={required}
+      className="w-full px-3 py-1.5 border"
     />
   )
 }
