@@ -3,9 +3,7 @@ require 'nokogiri'
 
 class ShortUrlsController < ApplicationController
     # For analytics
-    def index
-      # TODO: Get the total number of visits for each url
-       
+    def index       
       # Why left join instead of inner join?
       # There might be short_url with 0 visits, using inner join will exclude those short_url in results
       # TODO: Consider future scaling with cache instead of manual count (https://guides.rubyonrails.org/association_basics.html#counter-cache)
@@ -17,7 +15,7 @@ class ShortUrlsController < ApplicationController
       urls = ShortUrl.left_joins(:visits)
                       .group("short_urls.id")
                       .select("short_urls.*, COUNT(visits.id) AS visits_count")
-                      .order(created_at: :asc)
+                      .order(created_at: :desc)
                       .limit(per_page)
                       .offset((page - 1) * per_page)
                       # quick logic check: 
