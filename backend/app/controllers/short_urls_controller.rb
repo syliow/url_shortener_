@@ -52,6 +52,11 @@ class ShortUrlsController < ApplicationController
 
     
     def create
+      # bugfix for test: we need to ensure long url is present before we create
+      if params[:long_url].blank?
+        render json: {error: "Long URL is required"}, status: :bad_request
+        return
+      end
       # We should always fetch the title first before we save to db
       # TODO: What if fetching title takes too long. Maybe can consider improving with background jobs
       # https://guides.rubyonrails.org/active_job_basics.html
