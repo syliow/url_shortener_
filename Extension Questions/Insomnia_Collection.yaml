@@ -1,0 +1,192 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Coingecko Test - Query DEX data collection
+meta:
+  id: wrk_0535004ba9d043b48c0dff3bd115f430
+  created: 1773767761012
+  modified: 1773768457453
+  description: ""
+collection:
+  - url: https://gateway.thegraph.com/api/{{ _.YOUR_GRAPH_API_KEY
+      }}/subgraphs/id/5zvR82QoaXYFyDEKLZ9t6v9adgnptxYpKpSbxtgVENFV
+    name: "Q2: GetTop100Pools"
+    meta:
+      id: req_685483c78cec4b14892480666918b679
+      created: 1773767840326
+      modified: 1773769232395
+      isPrivate: false
+      description: |-
+        Question 2: Using above API, query 100 pools, with below attributes
+
+        id 
+
+        token0 id
+
+        token0 symbol
+
+        token1 id
+
+        token1 symbol
+      sortKey: -1773768049396
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query Get100Pools{\n  pools(first: 100) {\n    id\n    token0
+        {\n      id\n      symbol\n    }\n    token1
+        {\n      id\n      symbol\n    }\n  }\n}","operationName":"Get100Pools"}'
+    headers:
+      - name: User-Agent
+        value: insomnia/12.3.1
+        description: ""
+        disabled: false
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://gateway.thegraph.com/api/{{ _.YOUR_GRAPH_API_KEY
+      }}/subgraphs/id/5zvR82QoaXYFyDEKLZ9t6v9adgnptxYpKpSbxtgVENFV
+    name: "Q3: GetTop100HighestLiquidityPools"
+    meta:
+      id: req_e4a1082412ec4d63ac173e15117a1967
+      created: 1773768049296
+      modified: 1773769544191
+      isPrivate: false
+      description: >-
+        Question 3: Repeat #2 with additional conditions: query 100 pools with
+        the highest liquidity that were created in the past week
+
+
+
+        Date when creating this: 18th March 2026, we need to find timestamp from
+        one week ago
+
+
+        One week ago timestamp: 1773190800
+
+
+        GMT: Wednesday, March 11, 2026 at 1:00:00 AM
+
+        Your time zone: Wednesday, March 11, 2026 at 9:00:00 AM GMT+08:00
+
+        Relative: 7 days ago
+      sortKey: -1773768049371
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query GetTop100HighestLiquidityPools {\n  pools(\n    first:
+        100\n    orderBy: liquidity\n    orderDirection: desc\n    where:
+        {createdAtTimestamp_gte: \"1773190800\"}\n  ) {\n    id\n    token0
+        {\n      id\n      symbol\n    }\n    token1
+        {\n      id\n      symbol\n    }\n  }\n}","operationName":"GetTop100HighestLiquidityPools"}'
+    headers:
+      - name: User-Agent
+        value: insomnia/12.3.1
+        description: ""
+        disabled: false
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://gateway.thegraph.com/api/{{ _.YOUR_GRAPH_API_KEY
+      }}/subgraphs/id/5zvR82QoaXYFyDEKLZ9t6v9adgnptxYpKpSbxtgVENFV
+    name: "Q4: GetUSDC/WETHPool"
+    meta:
+      id: req_26d2a77c5a8f44fda8fbe440e650bfe0
+      created: 1773768379403
+      modified: 1773769241975
+      isPrivate: false
+      description: >-
+        Question 4: Using this USDC/WETH pool
+        0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8, query the below attributes:
+
+
+        id
+
+
+        token0 id
+
+
+        token0 symbol
+
+
+        token0 derivedETH
+
+
+        token1 id
+
+
+        token1 symbol
+
+
+        token1 derivedETH
+
+
+        liquidity
+
+
+        token0Price
+
+
+        token1Price
+
+
+        volumeToken0
+
+
+        volumeToken1
+
+
+        volumeUSD
+
+
+        totalValueLockedUSD
+      sortKey: -1773768049346
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query GetUsdcWethPool{\n  pool(id:
+        \"0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8\") {\n    id\n    token0
+        {\n      id\n      symbol\n      derivedETH\n    }\n    token1
+        {\n      id\n      symbol\n      derivedETH\n    }\n    liquidity\n    token0Price\n    token1Price\n    volumeToken0\n    volumeToken1\n    volumeUSD\n    totalValueLockedUSD\n  }\n}","operationName":"GetUsdcWethPool"}'
+    headers:
+      - name: User-Agent
+        value: insomnia/12.3.1
+        description: ""
+        disabled: false
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_1d6d15ba89950d9b118627d58c30d8a793c6926b
+    created: 1773767761016
+    modified: 1773767761016
+environments:
+  name: Base Environment
+  meta:
+    id: env_1d6d15ba89950d9b118627d58c30d8a793c6926b
+    created: 1773767761014
+    modified: 1773767825745
+    isPrivate: false
+  data:
+    YOUR_GRAPH_API_KEY: 240942298447af0e9d69a8f2ccf8cb18
