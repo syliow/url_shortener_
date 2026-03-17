@@ -27,7 +27,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
 # Test if short_url doesn't exist
   test "returns error for invalid short_url" do
     get "/urls/invalid123"
-    assert_response :not_found  #TODO (Test Failed): add bugfix to handle if user tries to access invalid shorturl
+    assert_response :not_found  #Fixed: returns error for invalid short_url
   end
 
 # Creates short_url successfully (includes fetch_title working)
@@ -39,7 +39,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
 # Missing long_url, short_url param when creating
   test "empty long_url param" do
     post shorten_path, params: {}
-    assert_response :error #TODO (Test Failed): add bugfix to handle able to create even when param is empty
+    assert_response :bad_request #Fixed: added validation to check for missing param before create
   end
 
 # Redirects valid url
