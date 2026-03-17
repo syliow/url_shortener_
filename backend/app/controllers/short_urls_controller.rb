@@ -27,22 +27,27 @@ class ShortUrlsController < ApplicationController
     # For individual short url analytics
     # Need show geolocation, timestamp of each visit for the specific short url
     def show 
-     url = ShortUrl.find_by(short_url: params[:short_url])
-     render json: {
-        short_url: url.short_url,
-        original_url: url.original_url,
-        title: url.title,
-        created_at: url.created_at,
-        visits_count: url.visits.count,
-        # Sort by dsc order for better ux
-        visits: url.visits.order(created_at: :desc).map { |visit|
+      # bugfix for test: need to ensure short_url is present before we call show 
+      url = ShortUrl.find_by(short_url: params[:short_url])
+      if url
+        render json: {
+          short_url: url.short_url,
+          original_url: url.original_url,
+          title: url.title,
+          created_at: url.created_at,
+          visits_count: url.visits.count,
+          # Sort by dsc order for better ux
+          visits: url.visits.order(created_at: :desc).map { |visit|
             {
-                city: visit.city,    
-                country: visit.country,
-                timestamp: visit.created_at
+              city: visit.city,    
+              country: visit.country,
+              timestamp: visit.created_at
             }
+          }
         }
-    }
+      else 
+        render json: { error: "Short URL not found" }, status: :not_found
+      end
     end
 
     

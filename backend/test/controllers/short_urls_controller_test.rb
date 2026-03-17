@@ -27,7 +27,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
 # Test if short_url doesn't exist
   test "returns error for invalid short_url" do
     get "/urls/invalid123"
-    assert_response :error  #TODO (Test Failed): add bugfix to handle if user tries to access invalid shorturl
+    assert_response :not_found  #TODO (Test Failed): add bugfix to handle if user tries to access invalid shorturl
   end
 
 # Creates short_url successfully (includes fetch_title working)
