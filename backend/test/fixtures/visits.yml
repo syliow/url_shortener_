@@ -1,13 +1,39 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  short_url: one
-  ip_address: MyString
-  country: MyString
-  city: MyString
+# A better guide: https://guides.rubyonrails.org/testing.html#fixtures
+user_visit_one:
+  short_url: a_very_very_long_name
+  ip_address: 123.45.67.89
+  country: Malaysia
+  city: Kuala Lumpur
 
-two:
-  short_url: two
-  ip_address: MyString
-  country: MyString
-  city: MyString
+user_visit_two:
+  short_url: github
+  ip_address: 1.1.1.1
+  country: Australia
+  city: Melbourne
+
+user_visit_three:
+  short_url: google
+  ip_address: 8.8.8.8
+  country: United States
+  city: New York City
+
+# Testing some edge cases
+empty_location:
+  short_url: google
+  ip_address: 127.0.0.1
+  country:
+  city:
+
+empty_city:
+  short_url: github
+  ip_address: 192.168.1.1
+  country: Malaysia
+  city:
+
+empty_country:
+  short_url: github
+  ip_address: 10.0.0.1
+  country:
+  city: Johor Bahru

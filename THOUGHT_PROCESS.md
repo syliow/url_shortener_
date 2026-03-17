@@ -97,3 +97,19 @@ TODO: Analytics
 - Chosen: 302 (Found) instead of 301 (Moved Permanently)
 - Reason: Browsers cache 301 redirects permanently, which would bypass our analytics tracking after first visit
 - 302 forces browser to always hit our server, allowing us to track every visit
+
+# Testing
+
+General Idea (based on the guide sequence)
+
+https://guides.rubyonrails.org/testing.html#fixtures
+
+- Start with fixtures testing
+
+  https://guides.rubyonrails.org/testing.html#testing-models
+
+- model testing
+
+  https://guides.rubyonrails.org/testing.html#functional-testing-for-controllers
+
+- functional testing
