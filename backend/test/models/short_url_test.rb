@@ -40,4 +40,10 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert url.short_url =~ /^[a-zA-Z0-9]+$/
   end
 
+  # test edge case from fixtures
+  test "untitled fixture exists" do
+    url = short_urls(:untitled)
+    assert_equal "Untitled", url.title
+  end
+
 end
