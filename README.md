@@ -3,7 +3,28 @@ URL Shortener README
 Deployed Application URL
 DEPLOYED_URL_HERE
 
-Installation Guide
+## Features
+
+- **Short URL generation** - Convert long URLs into short codes using Base62 encoding
+- **Click tracking** - Track every visit with location data (city, country)
+- **Analytics dashboard** - View visit counts and geographic breakdown for your URLs
+
+## API Endpoints
+
+```
+POST   /api/short_urls          - Create a new short URL
+GET    /api/short_urls          - List all short URLs with analytics
+GET    /:short_code             - Redirect to original URL (tracks the visit)
+```
+
+## Limitations
+
+This is an MVP with some known issues around performance and security. Check out [wiki/SOLUTION.md](wiki/SOLUTION.md) for details on the limitations and workarounds.
+
+If you're curious about my thought process while building this, I kept some rough notes in [THOUGHT_PROCESS.md](THOUGHT_PROCESS.md), they are a bit messy and unpolished but show how I worked through the requirements.
+
+## Installation Guide
+
 Clone the repo
 `git clone https://github.com/syliow/url_shortener_coingecko_test.git`
 
