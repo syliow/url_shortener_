@@ -63,5 +63,5 @@ Backend
 - PostgreSQL
 - Geocoder gem (For geolocation)
 
-Frontend: http://localhost:5173
-Backend API: http://localhost:3000
+Frontend: https://url-shortener-coingecko-test.vercel.app \
+Backend API: https://url-shortener-coingecko-test-1.onrender.com
