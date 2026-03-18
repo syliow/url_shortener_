@@ -1,7 +1,10 @@
 URL Shortener README
 
 Deployed Application URL\
-https://url-shortener-coingecko-test.onrender.com
+Frontend: https://url-shortener-coingecko-test.vercel.app \
+Backend API: https://url-shortener-coingecko-test-1.onrender.com 
+
+Note: Backend is deployed on render, render will automatically go to sleep after 15mins of inactivity. Might need to run backend first before checking on frontend
 
 ## Features
 
@@ -62,6 +65,3 @@ Backend
 - Rails
 - PostgreSQL
 - Geocoder gem (For geolocation)
-
-Frontend: https://url-shortener-coingecko-test.vercel.app \
-Backend API: https://url-shortener-coingecko-test-1.onrender.com
