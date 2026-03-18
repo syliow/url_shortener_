@@ -29,11 +29,11 @@ If you're curious about my thought process while building this, I kept some roug
 ## Installation Guide
 
 Clone the repo
-`git clone https://github.com/syliow/url_shortener_coingecko_test.git`
+`git clone https://github.com/syliow/url_shortener_.git`
 
 For `/frontend`
 
-1. `cd url_shortener_coingecko_test/frontend`
+1. `cd url_shortener_/frontend`
 2. Run `npm install`
 3. Copy the variables from `/frontend/.env.example` and create `/frontend/.env`
 4. Replace the env placeholder with your value
@@ -42,7 +42,7 @@ For `/frontend`
 
 For `/backend`
 
-1. `cd url_shortener_coingecko_test/backend`
+1. `cd url_shortener_/backend`
 2. Copy the variables from `/backend/.env.example` and create `/backend/.env`
 3. Replace the env placeholder with your value
 4. Install dependencies with `bundle install`
@@ -56,7 +56,6 @@ Tech Stack
 Frontend
 
 - React
-- Vite
 - TailwindCSS
 
 Backend
