@@ -65,3 +65,7 @@ Backend
 - Rails
 - PostgreSQL
 - Geocoder gem (For geolocation)
+
+
+The homepage design is an exact copy of https://app.bitly.com/
+<img width="849" height="353" alt="image" src="https://github.com/user-attachments/assets/2ba889a5-905b-439c-9ced-3df85c7523ca" />
