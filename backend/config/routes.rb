@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   get "/:short_url", to: "short_urls#redirect"
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "application#root"
 end
