@@ -1,3 +1,2 @@
 // API configuration
-export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
-export const SHORT_URL_DOMAIN = import.meta.env.VITE_SHORT_URL_DOMAIN || 'http://localhost:3000'
+export const BASE_API_URL = import.meta.env.VITE_BASE_API_URL || 'http://localhost:3000'
