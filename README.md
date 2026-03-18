@@ -1,7 +1,7 @@
 URL Shortener README
 
-Deployed Application URL
-DEPLOYED_URL_HERE
+Deployed Application URL\
+https://url-shortener-coingecko-test.onrender.com
 
 ## Features
 
