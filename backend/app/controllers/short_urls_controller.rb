@@ -37,6 +37,7 @@ class ShortUrlsController < ApplicationController
           created_at: url.created_at,
           visits_count: url.visits.count,
           # Sort by dsc order for better ux
+          # //N+1 query here, we should use pagination
           visits: url.visits.order(created_at: :desc).map { |visit|
             {
               city: visit.city,    

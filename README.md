@@ -2,7 +2,7 @@ URL Shortener README
 
 Deployed Application URL\
 Frontend: https://url-shortener-coingecko-test.vercel.app \
-Backend API: https://url-shortener-coingecko-test-1.onrender.com 
+Backend API: https://url-shortener-coingecko-test-1.onrender.com
 
 Note: Backend is deployed on render, render will automatically go to sleep after 15mins of inactivity. Might need to run backend first before checking on frontend
 
@@ -64,7 +64,7 @@ Backend
 - Rails
 - PostgreSQL
 - Geocoder gem (For geolocation)
-
+- Nokogiri (For fetching title)
 
 The homepage design is an exact copy of https://app.bitly.com/
 <img width="849" height="353" alt="image" src="https://github.com/user-attachments/assets/2ba889a5-905b-439c-9ced-3df85c7523ca" />
