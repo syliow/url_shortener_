@@ -73,10 +73,7 @@ The ideal solution is to implement a background job for fetching titles, but I k
 
 Right now when someone clicks a short URL, I geocode their IP and save the visit to the database before redirecting them. This adds latency for every redirect.
 
-I track visits before redirecting because losing clicks would defeat the whole point of
-having analytics. The tradeoff is added latency (for geocoding + DB write).
-For the traffic levels in this assessment, this is fine. At production scale, I would switch
-to async tracking with background jobs (Sidekiq/ActiveJob).
+I track visits before redirecting because losing clicks would defeat the whole point of having analytics. The tradeoff is added latency (for geocoding + DB write). For the traffic levels in this assessment, this is fine. At production scale, I would switch to async tracking with background jobs (Sidekiq/ActiveJob).
 
 ### No rate limiting or caching yet
 
